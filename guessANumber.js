@@ -2,7 +2,7 @@ let message = document.querySelector("h2");
 let tentative = document.querySelector("h3");
 //Fonction qui demande au joueur 2 de fournir un nombre :
 function chooseANumber(playerTwoInput){
-    playerTwoInput = prompt("J2 - Choisir un nombre:");
+    playerTwoInput = document.querySelector("#playerTwoInput");
     return playerTwoInput
 }
 // Fonction qui demande au joueur 1 de fournir un nombre à deviner (playerOneChoice) compris entre 0 et 50 :
@@ -53,10 +53,8 @@ function gamePlay() {
 gamePlay()
 
 
-/*
-let tentative = document.querySelector("h3");
-tentative.addEventListener("click", () => {
-    count += count;
-    tentative.innerText = "Nombre de tenttatives : " + count; 
+// le boutton déclanche gamePlay
+let button = document.querySelector("#button");
+button.addEventListener("click", () => {
+
     })
-*/
