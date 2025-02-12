@@ -1,45 +1,50 @@
-// Comparaison de givenNumber = number à choosenNumber = playerOneChoice:
-function didIWin(number, choosenNumber) {
-    if (number === choosenNumber) {
+// Fonction qui demande au joueur 1 de fournir un nombre à deviner (playerOneChoice) compris entre 0 et 50 :
+function pickAgivenNumber(playerOneChoice) {
+    playerOneChoice = parseInt(prompt("J1 - Choisir un nombre entre 0 et 50:"));
+    while (playerOneChoice < 0 || playerOneChoice > 50) {
+        playerOneChoice = parseInt(prompt("J1 - Choisir un nombre entre 0 et 50:"));
+    }
+    return playerOneChoice;
+}
+// Comparaison de givenNumber à choosenNumber (qui devient playerOneChoice dans la fonction PickANumber):
+function didIWin(choosenNumber) {
+    givenNumber = parseInt(prompt("J2 - Choisir un nombre:"));
+    if (givenNumber === choosenNumber) {
         return result = true;
     }
-    else if (number > choosenNumber) {
+    else if (givenNumber > choosenNumber) {
         alert("Plus petit");
         return result = false;
     }
-    else if (number < choosenNumber) {
+    else if (givenNumber < choosenNumber) {
         alert("Plus grand");
         return result = false;
     }
 }
-// Créer une fonction qui demande au joueur 1 de fournir un nombre à deviner compris entre 0 et 50 tant qu’il ne respecte pas ce range.
-function pickANumber(playerOneChoice) {
-    while (playerOneChoice < 0 || playerOneChoice > 50) {
-        playerOneChoice = parseInt(prompt("J1 - Choisir un nombre entre 0 et 50:"));
-    }
-    console.log(playerOneChoice);
-    return playerOneChoice;
-}
-// Fonction d'appel de fonction et d'enregistrement de la variable.
+// Fonction d'appel des fonctions et d'enregistrement de la variable.
 function gamePlay() {
-    playerOneInput = parseInt(prompt("J1 - Choisir un nombre entre 0 et 50:"));
-    playerOneInput = pickANumber(playerOneInput);
-    numberInput = parseInt(prompt("J2 - Choisir un nombre:"));
-    result = didIWin(numberInput, playerOneInput);
+    //Appel de la fonction pickAgivenNumber, pour que J1 choississe un nombre.
+    playerOneInput = pickAgivenNumber();
+
+    // Appel de la fonction didIWin, pour que J2 trouve le nombre.
+    result = didIWin(playerOneInput);
+    //tant que le résultat n'est pas vrai, on relance la fonction
     if (result !== true) {
-        while (result !== true) {//tant que le résultat n'est pas vrai, on relance la demande et la fonction
-            numberInput = parseInt(prompt("J2 - Choisir un nombre:"));
-            result = didIWin(numberInput, playerOneInput);
+        while (result !== true) {
+            result = didIWin(playerOneInput);
         }
     }
-    message.innerText = "Bravo ! Vous avez deviné le nombre.🎉";
+    message.innerText = "Bravo ! Vous avez deviné le nombre.🎉"; //Une fois que résultat = vraie, on change le texte de la page HTML
 }
 let message = document.querySelector("h2");
 let count = 0
-let tentative = document.querySelector("h3");
+
 gamePlay()
-// Création du compteur de tentatives
+// Création du compteur de tentatives, remplacement des prompt par des input.
+/*
+let tentative = document.querySelector("h3");
 tentative.addEventListener("click", () => {
     count += count;
     tentative.innerText = "Nombre de tenttatives : " + count; 
     })
+*/
