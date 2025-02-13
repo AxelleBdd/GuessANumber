@@ -39,6 +39,7 @@ function gamePlay() {
     if (result === true){
         message.innerText = "Bravo ! Vous avez deviné le nombre.🎉";
     }
+    return
 }
 //Appel de la fonction pickANumber, pour que joueur 1 choisisse un nombre, sortie de gamePlay pour ne pas répéter 
 //la fonction à chaque validation de la valeur du joueur 2.
