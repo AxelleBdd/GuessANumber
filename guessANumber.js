@@ -1,8 +1,10 @@
 let message = document.querySelector("h2");
 let tentative = document.querySelector("h3");
-//Fonction qui demande au joueur 2 de fournir un nombre :
-function chooseANumber(playerTwoInput){
-    playerTwoInput = document.querySelector("#playerTwoInput");
+let button = document.querySelector("#button");
+let count = 0;
+//Fonction qui demande au joueur 2 de fournir un nombre (avec un input):
+function chooseANumber(playerTwoInput) {
+    playerTwoInput = document.querySelector("#playerTwoInput").value;
     return playerTwoInput
 }
 // Fonction qui demande au joueur 1 de fournir un nombre à deviner (playerOneChoice) compris entre 0 et 50 :
@@ -14,47 +16,36 @@ function pickANumber(playerOneChoice) {
     return playerOneChoice;
 }
 // Comparaison de playerTwoChoice (givenNumber) à choosenNumber (playerOneChoice):
-function didIWin(playerTwoChoice,choosenNumber) {
-    if (playerTwoChoice === choosenNumber) {
-        return result = true;
+function didIWin(playerTwoChoice, choosenNumber) {
+    if (playerTwoChoice == choosenNumber) {
+        return true;
     }
     else if (playerTwoChoice > choosenNumber) {
         alert("Plus petit");
-        return result = false;
+        return false;
     }
     else if (playerTwoChoice < choosenNumber) {
         alert("Plus grand");
-        return result = false;
+        return false;
     }
 }
 // Fonction d'appel des fonctions et d'enregistrement de la variable.
 function gamePlay() {
-    let count = 1
-    //Appel de la fonction pickANumber, pour que joueur 1 choisisse un nombre.
-    playerOneInput = pickANumber();
-    //Appel de la fonction chooseANumber, pour que joueur 2 choisisse un nombre
-    givenNumber = parseInt(chooseANumber())
-    // Appel de la fonction didIWin, pour que joueur 2 trouve le nombre.
-    tentative.innerText = `Tentative 1`;
-    result = didIWin(givenNumber,playerOneInput);
-    //tant que le résultat n'est pas vrai, on relance la fonction
-    while (result !== true) {
-        count = ++count;
-        tentative.innerText = `Tentative ${count}`;
-        result = didIWin(parseInt(chooseANumber()),playerOneInput);
+//Appel de la fonction chooseANumber, pour que joueur 2 choisisse un nombre
+    givenNumber = chooseANumber();
+// Appel de la fonction didIWin, pour que joueur 2 trouve le nombre.
+    result = didIWin(givenNumber, playerOneInput);
+    console.log(result);
+    if (result === true){
+        message.innerText = "Bravo ! Vous avez deviné le nombre.🎉";
     }
-    message.innerText = "Bravo ! Vous avez deviné le nombre.🎉";
-    ;
 }
-//Une fois que résultat = vraie, on change le texte de la page HTML
-
-// Ajout de l'information de tentatives
-
-gamePlay()
-
-
-// le boutton déclanche gamePlay
-let button = document.querySelector("#button");
+//Appel de la fonction pickANumber, pour que joueur 1 choisisse un nombre, sortie de gamePlay pour ne pas répéter 
+//la fonction à chaque validation de la valeur du joueur 2.
+playerOneInput = pickANumber();
+//Le boutton déclanche gamePlay.
 button.addEventListener("click", () => {
-
-    })
+    gamePlay()
+    count = ++count;
+    tentative.innerText = `Tentative ${count}`;
+})
