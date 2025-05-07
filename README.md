@@ -1,4 +1,4 @@
-># 👥 Individual execise
+># 👥 Individual exercise
 >
 >🏃 Sprint : 1 week alongside classes
 >
